@@ -1,18 +1,16 @@
 #!/bin/bash
 
-#Global vars
-
 # Create swap file
 # $(dirname $0)/src/create_swap.sh
 
 # Creating new Sudoer user
-username=$($(dirname $0)/src/create_sudoer_user.sh)
+source $(dirname $0)/src/create_sudoer_user.sh
 
 #Install git 
 # apt-get update && apt-get install -y git 
 
 # Setup git-aware-prompt
-su "$username" -c "sudo $(pwd)/src/setup_git-aware-prompt.sh $username"
+su -c "sudo $(pwd)/src/setup_git-aware-prompt.sh $username" - $username
 
 # Install apt packages
 # $PKGARR="git nodejs npm"
