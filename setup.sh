@@ -1,46 +1,39 @@
 #!/bin/bash
 
 # Create swap file
-# $(dirname $0)/src/create_swap.sh
+echo "Do you wish to create swap file?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) $(dirname $0)/src/create_swap.sh; break;;
+        No ) break;;
+    esac
+done
 
 # Creating new Sudoer user
-source $(dirname $0)/src/create_sudoer_user.sh
+echo "Do you wish to create sudoer user?"
+select is_sudoer in "Yes" "No"; do
+    case $is_sudoer in
+        Yes ) source $(dirname $0)/src/create_sudoer_user.sh; break;;
+        No ) break;;
+    esac
+done
 
-#Install git 
+# Install git 
 # apt-get update && apt-get install -y git 
 
 # Setup git-aware-prompt
-su -c "sudo $(pwd)/src/setup_git-aware-prompt.sh $username" - $username
-
-# Install apt packages
-# $PKGARR="git nodejs npm"
-
-# for pkg in $PKGARR; do
-#     if dpkg --get-selections | grep -q "^$pkg[[:space:]]*install$" >/dev/null; then
-#         echo -e "$pkg is already installed"
-#     else
-#         if apt-get -qq install $pkg; then
-#             echo "Successfully installed $pkg"
-#         else
-#             echo "Error installing $pkg"
-#         fi
-#     fi
+# echo "Do you wish to install git-aware-prompt?"
+# select yn in "Yes" "No"; do
+#     case $yn in
+#         Yes )   
+#             case $is_sudoer in
+#                 Yes )
+#                     ;;
+#                 No ) read -p "Enter the user to install: " username
+#                     ;;
+#             esac
+#             sudo -u $username "$(dirname $0)/src/setup_git-aware-prompt.sh";; 
+#         No )    
+#             ;;
+#     esac
 # done
-
-# Install Node global packages
-# $NPMPKG="n yarn pm2"
-
-# for pkg in $PKGARR; do
-#     if dpkg --get-selections | grep -q "^$pkg[[:space:]]*install$" >/dev/null; then
-#         echo -e "$pkg is already installed"
-#     else
-#         if apt-get -qq install $pkg; then
-#             echo "Successfully installed $pkg"
-#         else
-#             echo "Error installing $pkg"
-#         fi
-#     fi
-# done
-
-# Update nodejs
-# n lts 

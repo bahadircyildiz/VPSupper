@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update && apt-get install -y git
+# RUN apt-get update && apt-get install -y git
 
 RUN find /app -type f -iname "*.sh" -exec chmod +x {} \;
 
